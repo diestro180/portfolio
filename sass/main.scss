@@ -1,0 +1,136 @@
+//! HTML5 Boilerplate v5.0 | MIT License | http://h5bp.com/
+@import 'compass';
+@import 'compass/css3';
+@import 'vars';
+@import 'normalize';
+
+html,
+body {
+  height: 100%;
+}
+
+//MENU
+
+.menu {
+  font-family: 'Heebo', sans-serif;
+  font-size: 2rem;
+  left: 15px;
+  position: absolute;
+  top: 15px;
+  z-index: 7;
+}
+
+.menu-icon {
+  cursor: pointer;
+}
+
+.menu-icon-line {
+  fill: none;
+  stroke: $white;
+  stroke-width: 2px;
+}
+
+.menu-list {
+  @include transform(translateX(-140%));
+  margin: 0;
+  padding: 0;
+}
+
+.menu-item {
+  list-style-type: none;
+
+  &:first-of-type {
+    margin-bottom: 10px;
+  }
+
+  &:last-of-type {
+    margin-top: 10px;
+  }
+}
+
+.menu-link {
+  color: $white;
+  text-decoration: none;
+}
+
+.section {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+}
+
+.section__active {
+  z-index: 5;
+}
+
+.section__main {
+  background: $main-bg-color;
+  color: $white;
+  z-index: 1;
+}
+
+.section__work {
+  background: $work-bg-color;
+  color: $white;
+  visibility: hidden;
+  z-index: 2;
+}
+
+.section__about {
+  background: $about-bg-color;
+  color: $white;
+  visibility: hidden;
+  z-index: 3;
+}
+
+.section__contact {
+  background: $contact-bg-color;
+  color: $white;
+  visibility: hidden;
+  z-index: 4;
+}
+
+.main-title {
+  font-family: 'Source Code Pro', monospace;
+  font-size: 7rem;
+  margin: 0;
+  padding: 0;
+  z-index: 2;
+}
+
+.section__main--canvas {
+  left: 0;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+}
+
+.background {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  z-index: 6;
+}
+
+.background-animation {
+  @include transform(scale(200));
+}
+
+.background-animation__circle {
+  display: none;
+  fill: $white;
+}
+
+.background-animation__square {
+  fill: $white;
+}

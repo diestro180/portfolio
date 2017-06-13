@@ -1,0 +1,4 @@
+**.scssc
+node_modules/
+css-lint-report.xml
+scss-lint.yml

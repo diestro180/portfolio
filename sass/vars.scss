@@ -1,5 +1,16 @@
-$main-bg-color: #4b72ff;
-$work-bg-color: #fec133;
-$about-bg-color: #9724a7;
-$contact-bg-color: #17265f;
 $white: #fff;
+$black: #000;
+$grey: #666;
+
+$main-bg-color: #4b72ff;
+$work-bg-color: $black;
+$about-bg-color: #4b72ff;
+$contact-bg-color: $grey;
+$campaign-title-bg-color: rgba(255, 255, 255, .7);
+
+//MEDIA QUERIES
+
+$xtra-small-devices: 'only screen and (min-width : 480px)';
+$small-devices: 'only screen and (min-width : 768px)';
+$medium-size: 'only screen and (min-width : 992px)';
+$large-size: 'only screen and (min-width : 1200px)';

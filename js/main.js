@@ -1,83 +1,72 @@
 (function () {
     "use strict";
     var Portfolio = function () {
-        var //$bg = document.getElementsByClassName('background')[0],
-            $bgSvg = document.getElementById('background-animation'),
-            $bgCircle = document.getElementById('background-animation__circle'),
-            $bgSquare = document.getElementById('background-animation__square'),
-            $menuIcon = document.getElementById('menu-icon'),
-            $menuLineNemu = document.getElementsByClassName('menu-icon-line__menu'),
-            $menuLineClose = document.getElementsByClassName('menu-icon-line__close'),
-            $menuItem = document.getElementsByClassName('menu-item'),
-            // $sectionMain = document.getElementsByClassName('section-main'),
-            $sectionWork = document.getElementsByClassName('section__work'),
-            $sectionAbout = document.getElementsByClassName('section__about'),
-            $sectionContact = document.getElementsByClassName('section__contact'),
-            $sections = document.getElementsByClassName('section'),
-            menuOpen = false;
+        var $scrollLinks = document.getElementsByClassName('scroll__link'),
+            $campaignCover = document.getElementsByClassName('campaign__holder'),
+            $campaignSvgRect  = document.getElementsByClassName('campaign__path--2');
 
         this.bindEvents = function () {
+
             var i = 0,
-                menuClick = document.createEvent('Event');
-            menuClick.initEvent('menuClick', true, true);
+                j = 0;
 
-            //background control
             function openSection(e) {
-                var scale = window.innerHeight > window.innerWidth ? window.innerHeight : window.innerWidth,
-                    color = null,
-                    section = null,
-                    tl = new TimelineMax();
-                switch (e.target.dataset.section) {
-                case "work":
-                    color = '#fec133';
-                    section = $sectionWork;
-                    break;
-                case "about":
-                    color = '#9724a7';
-                    section = $sectionAbout;
-                    break;
-                case "contact":
-                    color = '#17265f';
-                    section = $sectionContact;
-                    break;
-                }
-
-                e.target.dispatchEvent(menuClick);
-
-                tl.set($bgSquare, {morphSVG: $bgCircle, fill: color});
-                tl.to($bgSquare, 1, {morphSVG: $bgSquare});
-                tl.to($bgSvg, 0.5, {scale: (scale / 144)}, '-=0.5');
-                tl.set($sections, {autoAlpha: 0, zIndex: 1});
-                tl.set(section, {autoAlpha: 5});
-                tl.to($bgSvg, 0.5, {autoAlpha: 0});
-                tl.set($bgSvg, {scale: 0, autoAlpha: 1});
+                e.preventDefault();
+                var dest = document.getElementsByClassName(e.target.dataset.section)[0].offsetTop;
+                TweenMax.to(window, 1, {scrollTo: {y: dest}});
             }
 
-            for (i; i < $menuItem.length; i++) {
-                $menuItem[i].addEventListener('click', openSection);
+            function svgHover(e) {
+                var rect = e.target.children[1].children[1],
+                    arch = e.target.children[1].children[0],
+                    title = e.target.children[0],
+                    details = e.target.children[2].children;
+
+                TweenMax.to(rect, 0.3, {morphSVG: {shape: arch}, fill: 'rgba(255, 255, 255, .9)'});
+                TweenMax.to(title, 0.1, {opacity: 0});
+                TweenMax.staggerTo(details, 0.3, {y: 0, opacity: 1}, 0.2);
             }
 
-            //menu control
-            $menuIcon.addEventListener('click', function () {
-                if (menuOpen) {
-                    TweenMax.to($menuLineClose, 0.1, {drawSVG: "50% 50%"});
-                    TweenMax.to($menuLineNemu, 0.1, {drawSVG: "0% 100%"});
-                    TweenMax.staggerTo($menuItem, 0.1, {x: "0%"}, 0.1);
-                    menuOpen = false;
-                } else {
-                    TweenMax.to($menuLineNemu, 0.1, {drawSVG: "50% 50%"});
-                    TweenMax.to($menuLineClose, 0.1, {drawSVG: "0% 100%"});
-                    TweenMax.staggerTo($menuItem, 0.1, {x: "140%"}, 0.1);
-                    menuOpen = true;
-                }
-            });
+            function svgLeave(e) {
+                var rect = e.target.children[1].children[1],
+                    title = e.target.children[0],
+                    details = e.target.children[2].children;
+
+                TweenMax.to(rect, 0.3, {morphSVG: {shape: rect}, fill: 'rgba(255, 255, 255, .6)'});
+                TweenMax.to(title, 0.3, {opacity: 1});
+                TweenMax.to(details, 0.1, {opacity: 0, onComplete: function () {
+                    TweenMax.set(details, {clearProps: 'all'});
+                }});
+            }
+
+            for (i; i < $scrollLinks.length; i++) {
+                $scrollLinks[i].addEventListener('click', openSection);
+            }
+
+            for (j; j < $campaignCover.length; j++) {
+                $campaignCover[j].addEventListener('mouseenter', svgHover);
+                $campaignCover[j].addEventListener('mouseleave', svgLeave);
+            }
         };
-        this.init = function () {
-            TweenMax.set($menuLineClose, {drawSVG: "50% 50%"});
-            TweenMax.to($bgSquare, 0.5, {morphSVG: $bgCircle, delay: 0.5});
-            TweenMax.to($bgSvg, 1, {scale: 0});
-            this.bindEvents();
 
+        this.instafeed = function () {
+            var feed = new Instafeed({
+                get: 'user',
+                userId: '29586907',
+                clientId: '6be499327b054e889399f69adbed21a1',
+                accessToken: '29586907.6be4993.bfabd07a67c9494bb786d9b3114afc48',
+                resolution: 'standard_resolution',
+                limit: 3,
+                template: '<div class="insta-feed--container"><img class="insta-feed--image" src="{{image}}" /></div>'
+            });
+            feed.run();
+        };
+
+
+        this.init = function () {
+            MorphSVGPlugin.convertToPath($campaignSvgRect);
+            this.bindEvents();
+            this.instafeed();
         };
     };
 
@@ -91,35 +80,19 @@
 
 (function () {
     "use strict";
-    var width, height, largeHeader, canvas, ctx, points, target, animateHeader = true;
+    var width, height, canvas, ctx, points, target, animateHeader = true;
 
     function initHeader() {
-        width = window.innerWidth;
-        height = window.innerHeight;
+        width = window.outerWidth;
+        height = window.outerHeight;
         target = {x: width / 2, y: height / 2};
-
-        largeHeader = document.getElementsByClassName('section__main')[0];
-        largeHeader.style.height = height + 'px';
 
         canvas = document.getElementById('canvas');
         canvas.width = width;
         canvas.height = height;
         ctx = canvas.getContext('2d');
 
-        var x,
-            y,
-            i,
-            j,
-            k,
-            c,
-            m,
-            px,
-            py,
-            p,
-            closest,
-            p1,
-            p2,
-            placed;
+        var x, y, i, j, k, c, m, px, py, p, closest, p1, p2, placed;
 
         // Util
         function getDistance(p1, p2) {
@@ -196,20 +169,6 @@
         }
     }
 
-    function mouseMove(e) {
-        var posx, posy;
-        posx = posy = 0;
-        if (e.pageX || e.pageY) {
-            posx = e.pageX;
-            posy = e.pageY;
-        } else if (e.clientX || e.clientY) {
-            posx = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
-            posy = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
-        }
-        target.x = posx;
-        target.y = posy;
-    }
-
     function scrollCheck() {
         if (document.body.scrollTop > height) {
             animateHeader = false;
@@ -218,24 +177,9 @@
         }
     }
 
-    function resize() {
-        width = window.innerWidth;
-        height = window.innerHeight;
-        largeHeader.style.height = height + 'px';
-        canvas.width = width;
-        canvas.height = height;
-    }
-
     // Event handling
     function addListeners() {
-        if (!(window.hasOwnProperty('ontouchstart'))) {
-            window.addEventListener('mousemove', mouseMove);
-        }
         window.addEventListener('scroll', scrollCheck);
-        window.addEventListener('resize', resize);
-        window.addEventListener('menuClick', function () {
-            animateHeader = false;
-        });
     }
 
     // animation

@@ -14,55 +14,131 @@
 
         <script src="js/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     </head>
-    <body>
+    <body class="body">
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-
-        <nav class="menu">
-            <svg id="menu-icon" class="menu-icon" width="50" height="50" viewBox="0 0 50 50">
-              <line class="menu-icon-line menu-icon-line__menu" x1="0" y1="2" y2="2" x2="50"/>
-              <line class="menu-icon-line menu-icon-line__menu" x1="0" y1="14" y2="14" x2="50" />
-              <line class="menu-icon-line menu-icon-line__menu" x1="0" y1="28" y2="28" x2="50" />
-              <line class="menu-icon-line menu-icon-line__menu " x1="0" y1="40" y2="40" x2="50" />
-              <line class="menu-icon-line menu-icon-line__close" x1="0" y1="0" y2="50" x2="50" />
-              <line class="menu-icon-line menu-icon-line__close" x1="0" y1="50" y2="0" x2="50" />
-            </svg>
-            <ul class="menu-list">
-                <li class="menu-item work-link"><a class="menu-link"  data-section="work" href="#">work</a></li>
-                <li class="menu-item about-link"><a class="menu-link"  data-section="about" href="#">about</a></li>
-                <li class="menu-item contact-link"><a class="menu-link"  data-section="contact"href="#">contact</a></li>
-            </ul>
-        </nav>
-        <div class="background">
-          <svg id="background-animation" class="background-animation" width="144" height="144" viewBox="0 0 144 144">
-            <path id="background-animation__square" class="background-animation__square" d="M0 0 H 144 V 144 H 0 L 0 0"/>
-            <path id="background-animation__circle" class="background-animation__circle" d="M71.5,0C113,0,144,30.75,144,72c0,40.75-31.5,72-72.5,72C31.25,144,0,112.5,0,72,0,31.25,31.5,0,71.5,0Z"/>
-          </svg>
-        </div>
-        <section class="section section__main">
-          <canvas id="canvas" class="section__main--canvas"></canvas>
-          <h1 class="main-title">HI_</h1>
+        <section class="section section--main">
+          <div class="section__wrapper">
+            <header class="header">
+              <h2 class="header__title">Camilo Restrepo</h2>
+              <h3 class="header__subtitle">Web developer</h3>
+            </header>
+            <nav class="menu">
+              <ul class="menu__list">
+                <li class="menu__item">
+                  <a class="menu__link menu__link--work scroll__link" href="#">
+                    <svg class="menu__line menu__line--work" viewBox="0 0 100 60" data-section="section--work">
+                        <path d="M100,60 0,60 0,0 100,0z" />
+                    </svg>
+                    <span class="menu__link-text">Work</span>
+                  </a>
+                </li>
+                <li class="menu__item">
+                  <a class="menu__link menu__link--about scroll__link" href="#">
+                    <svg class="menu__line menu__line--about" viewBox="0 0 116 60" data-section="section--about">
+                        <path d="M116,60 0,60 0,0 116,0z" />
+                    </svg>
+                    <span class="menu__link-text">About</span>
+                  </a>
+                </li>
+                <li class="menu__item">
+                  <a class="menu__link menu__link--contact scroll__link" href="#">
+                    <svg class="menu__line menu__line--contact" viewBox="0 0 150 60" data-section="section--contact">
+                        <path d="M150,60 0,60 0,0 150,0z" />
+                    </svg>
+                    <span class="menu__link-text">Contact</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+            <canvas id="canvas" class="section__main--canvas"></canvas>
+            <h1 class="main-title">HI_</h1>
+          </div>
         </section>
 
-        <section class="section section__work">
-            <div class="wrapper">
-              <p>Work!</p>
-
+        <section class="section section--work">
+            <div class="section__wrapper">
+              <h2 class="section__header">Work</h2>
+              <h3>web site redesign:</h3>
+              <a href="http://www.swhp.org/" target="_blank" class="link">Scott and White</a>
+              <h3>html 5 banners:</h3>
+              <p>I have over a year of experience working on Online Advertisement. during this time I have honed my skills creating interesting and compelling animations</p>
+              <p>relevant skills include GSAP, canvas animation, and collaborating with Google Double Click and FLashtalking.</p>
+              <div class="campaign">
+                <div class="campaign__holder campaign__holder--lego">
+                  <p class="campaign__title">lego</p>
+                  <svg class="campaign__svg" width="300" height="227" viewBox="0 0 300 227" preserveAspectRatio="none">
+                    <path class="campaign__path campaign__path--1" d="M0,70V227H300V0Z"/>
+                    <rect class="campaign__path campaign__path--2" y="150" width="300" height="77"/>
+                  </svg>
+                  <ul class="campaign__details">
+                    <li class="campaign__detail-list">OLA</li>
+                    <li class="campaign__detail-list">microsites</li>
+                    <li class="campaign__detail-list">over 50 campaigns</li>
+                  </ul>
+                </div>
+                <div class="campaign__holder campaign__holder--adidas">
+                  <p class="campaign__title">adidas</p>
+                  <svg class="campaign__svg" width="300" height="227" viewBox="0 0 300 227" preserveAspectRatio="none">
+                    <path class="campaign__path campaign__path--1" d="M0,70V227H300V0Z"/>
+                    <rect class="campaign__path campaign__path--2" y="150" width="300" height="77"/>
+                  </svg>
+                  <ul class="campaign__details">
+                    <li class="campaign__detail-list">OLA</li>
+                    <li class="campaign__detail-list">over 50 campaigns</li>
+                  </ul>
+                </div>
+                <div class="campaign__holder campaign__holder--reebok">
+                  <p class="campaign__title">Reebok</p>
+                  <svg class="campaign__svg" width="300" height="227" viewBox="0 0 300 227" preserveAspectRatio="none">
+                    <path class="campaign__path campaign__path--1" d="M0,70V227H300V0Z"/>
+                    <rect class="campaign__path campaign__path--2" y="150" width="300" height="77"/>
+                  </svg>
+                  <ul class="campaign__details">
+                    <li class="campaign__detail-list">OLA</li>
+                    <li class="campaign__detail-list">landing pages</li>
+                    <li class="campaign__detail-list">over 50 campaigns</li>
+                  </ul>
+                </div>
+              </div>
+              <a class="link scroll__link"  data-section="section--about" href="#" data-section="section--about">about</a>
             </div>
         </section> <!-- #work -->
 
-        <section class="section section__about">
-            <div class="wrapper">
-              <p>about</p>
-
+        <section class="section section--about">
+            <div class="section__wrapper">
+              <h2 class="section__header">About</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris accumsan urna quis magna eleifend, sed porttitor justo consequat. Curabitur ex odio, consequat non mi quis, laoreet commodo velit. Cras vehicula ullamcorper ex, non euismod lectus convallis a. Duis consequat porta accumsan.</p>
+              <p>In rutrum pellentesque sem, quis rhoncus diam sodales eget. Sed porttitor urna sed orci sodales porttitor. Suspendisse scelerisque, leo eget lobortis gravida, metus ante volutpat est, et aliquet dolor nisi id diam. Nullam ornare pretium augue, ut sodales lacus placerat ullamcorper.</p>
+              <a class="link" href="">Resume</a>
+              <div id="instafeed" class="instagram-feed"></div>
+              <a class="link scroll__link" href="#" data-section="section--contact">contact</a>
             </div>
         </section> <!-- #about -->
 
-        <section class="section section__contact">
-            <div class="wrapper">
-              <p>contact</p>
-
+        <section class="section section--contact">
+            <div class="section__wrapper">
+              <h2 class="section__header">Contact</h2>
+              <a class="link link__contact" href="https://www.linkedin.com/in/restrepojuan/" target="_blank">linked In</a>
+              <a class="link link__contact" href="diestro180@gmail.com">send me a message</a>
+              <a class="link link__contact scroll__link" data-section="section--main" href="#">back to top</a>
+              <svg id="Layer_1" width="802" height="624" viewBox="0 0 802 624">
+                <defs>
+                  <style>
+                    .cls-1 {
+                      fill: none;
+                      stroke: #000;
+                      stroke-miterlimit: 10;
+                    }
+                  </style>
+                </defs>
+                <title>selfie-1</title>
+                <polygon class="cls-1" points="101 623 1 426 161 390 1 172 229 250 179 64 217 74 283 1 283 62 507 1 491 48 593 32 559 248 745 218 579 370 745 358 725 412 801 466 751 574 779 602 727 623 101 623"/>
+                <polygon class="cls-1" points="145 616 1 550 215 406 131 138 701 50 603 210 745 312 601 428 787 522 699 623 145 616"/>
+                <polygon class="cls-1" points="127 616 65 394 259 394 109 166 335 44 661 88 543 206 685 240 535 350 715 392 687 472 769 520 669 622 127 616"/>
+                <polygon class="cls-1" points="31 623 179 482 59 313 277 348 93 88 737 58 571 130 695 268 561 341 737 286 689 434 769 438 789 623 31 623"/>
+              </svg>
             </div>
         </section> <!-- #contact -->
 

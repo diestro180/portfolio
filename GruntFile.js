@@ -38,7 +38,8 @@ module.exports = function(grunt) {
             'Back',
             'Circ',
             'requestAnimationFrame',
-            'Event'
+            'Event',
+            'Instafeed'
           ]
         }
       }

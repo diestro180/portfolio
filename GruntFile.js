@@ -23,6 +23,7 @@ module.exports = function(grunt) {
           browser: true,
           node: false,
           plusplus: true,
+          this: true,
           predef: [
             'jQuery',
             'TimelineMax',

@@ -3,7 +3,7 @@
     var Portfolio = function () {
         var $scrollLinks = document.getElementsByClassName('scroll__link'),
             $campaignCover = document.getElementsByClassName('campaign__holder'),
-            $campaignSvgRect  = document.getElementsByClassName('campaign__path--2');
+            $campaignSvgRect = document.getElementsByClassName('campaign__path--2');
 
         this.bindEvents = function () {
 

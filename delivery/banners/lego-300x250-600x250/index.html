@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    html,
+    body,
+
+    #richload1 {
+      left: 0;
+      position: absolute;
+      top: 0;
+      z-index: 1;
+      width: 300px;
+      height: 250px;
+    }
+    
+    #richloadContainer {
+      display: none;
+      width: 600px;
+      height: 250px;
+      z-index: 2;
+    }
+  </style>
+</head>
+
+<body>
+  <ft-expand customclose>
+    <div id="richloadContainer"></div>
+  </ft-expand>
+  <div id="btn"></div>
+  <ft-richload name="richload1" id="richload1"></ft-richload>
+
+  <script src="http://cdn.flashtalking.com/frameworks/js/api/2/9/html5API.js"></script>
+  <script>
+    var richload1 = myFT.$("#richload1"),
+      btn = myFT.$("#btn"),
+      rlContainer = myFT.$("#richloadContainer"),
+      hasBeenExpanded = false;
+
+    myFT.on('expand', function() {
+
+      if (hasBeenExpanded === false) {
+        myFT.insertRichLoad({
+          parent: rlContainer,
+          richLoad: "richload2"
+        });
+        hasBeenExpanded = true
+      } else {
+        //do nothing
+      }
+      rlContainer[0].style.display = "block"
+      richload1[0].style.display = "none"
+
+    })
+    myFT.on('contract', function() {
+      richload1[0].style.display = "block"
+    })
+  </script>
+
+</body>
+
+</html>

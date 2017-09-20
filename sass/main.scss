@@ -4,7 +4,7 @@
 @import 'vars';
 @import 'normalize';
 
-//GLOBAL: ;
+//GLOBAL
 
 html,
 body {
@@ -20,6 +20,7 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  position: relative;
   width: 100vw;
 }
 
@@ -42,7 +43,8 @@ body {
 }
 
 .section--contact {
-  background: $contact-bg-color url('img/selfie-1.png') no-repeat right bottom;
+  background: $contact-bg-color url('img/selfie-mobile.png') no-repeat center bottom;
+  background-size: 100%;
   color: $white;
   z-index: 4;
 }
@@ -126,7 +128,7 @@ body {
 
 .menu__line {
   @include transition(stroke-dashoffset .3s);
-  display: none;
+  @include opacity(0);
   fill: none;
   height: 60px;
   left: 0;
@@ -251,10 +253,10 @@ body {
 .campaign__holder {
   background-size: cover;
   cursor: pointer;
+  height: 250px;
   margin: 0 auto 20px;
-  min-height: 190px;
   position: relative;
-  width: 100%;
+  width: 300px;
 }
 
 .campaign__holder--lego {
@@ -330,17 +332,17 @@ body {
 
 //CONTACT
 
+.selfie-img {
+  bottom: 0;
+  position: absolute;
+  right: 10%;
+}
+
 
 @media #{$xtra-small-devices} {
 
   .link {
     margin: 0;
-  }
-
-  //WORK
-
-  .campaign__holder {
-    flex-basis: 45%;
   }
 
   //ABOUT
@@ -356,6 +358,12 @@ body {
 }
 
 @media #{$small-devices} {
+
+  //GLOBAL
+
+  .section--contact {
+    background: $contact-bg-color url('img/selfie.png') no-repeat right bottom;
+  }
 
   //MAIN SECTION
 
@@ -382,19 +390,13 @@ body {
   }
 
   .menu__line {
-    display: block;
+    @include opacity(1);
   }
 
   //CANVAS-TITLE
 
   .main-title {
     display: block;
-  }
-
-  //WORK
-
-  .campaign__holder {
-    flex-basis: 30%;
   }
 
   //ABOUT

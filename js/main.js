@@ -2,50 +2,31 @@
     "use strict";
     var Portfolio = function () {
         var $scrollLinks = document.getElementsByClassName('scroll__link'),
-            $campaignCover = document.getElementsByClassName('campaign__holder'),
-            $campaignSvgRect = document.getElementsByClassName('campaign__path--2');
-
+            $iframes = document.getElementsByClassName('campaign__iframe'),
+            $campaignLink = document.getElementsByClassName('link__campaign'),
+            iframesLink = ['banners/lego', 'banners/adidas', 'banners/reebok'];
         this.bindEvents = function () {
 
             var i = 0,
                 j = 0;
 
-            function openSection(e) {
+            function scrollToSection(e) {
                 e.preventDefault();
                 var dest = document.getElementsByClassName(e.target.dataset.section)[0].offsetTop;
                 TweenMax.to(window, 1, {scrollTo: {y: dest}});
             }
 
-            function svgHover(e) {
-                var rect = e.target.children[1].children[1],
-                    arch = e.target.children[1].children[0],
-                    title = e.target.children[0],
-                    details = e.target.children[2].children;
-
-                TweenMax.to(rect, 0.3, {morphSVG: {shape: arch}, fill: 'rgba(255, 255, 255, .9)'});
-                TweenMax.to(title, 0.1, {opacity: 0});
-                TweenMax.staggerTo(details, 0.3, {y: 0, opacity: 1}, 0.2);
-            }
-
-            function svgLeave(e) {
-                var rect = e.target.children[1].children[1],
-                    title = e.target.children[0],
-                    details = e.target.children[2].children;
-
-                TweenMax.to(rect, 0.3, {morphSVG: {shape: rect}, fill: 'rgba(255, 255, 255, .6)'});
-                TweenMax.to(title, 0.3, {opacity: 1});
-                TweenMax.to(details, 0.1, {opacity: 0, onComplete: function () {
-                    TweenMax.set(details, {clearProps: 'all'});
-                }});
+            function campaignClick(e) {
+                $iframes[e.target.dataset.campaign].src = iframesLink[e.target.dataset.campaign];
+                TweenMax.to($iframes[e.target.dataset.campaign], 0.3, {autoAlpha: 1});
             }
 
             for (i; i < $scrollLinks.length; i++) {
-                $scrollLinks[i].addEventListener('click', openSection);
+                $scrollLinks[i].addEventListener('click', scrollToSection);
             }
 
-            for (j; j < $campaignCover.length; j++) {
-                $campaignCover[j].addEventListener('mouseenter', svgHover);
-                $campaignCover[j].addEventListener('mouseleave', svgLeave);
+            for (j; j < $campaignLink.length; j++) {
+                $campaignLink[j].addEventListener('click', campaignClick);
             }
         };
 
@@ -64,7 +45,6 @@
 
 
         this.init = function () {
-            MorphSVGPlugin.convertToPath($campaignSvgRect);
             this.bindEvents();
             this.instafeed();
         };
@@ -72,7 +52,6 @@
 
     window.onload = function () {
         var portfolio = new Portfolio();
-
         portfolio.init();
     };
 }());

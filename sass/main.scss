@@ -259,6 +259,11 @@ body {
   width: 300px;
 }
 
+.campaign__holder--inner {
+  margin: 0;
+  overflow: hidden;
+}
+
 .campaign__holder--lego {
   background-image: url('img/lego.jpg');
 }
@@ -271,43 +276,83 @@ body {
   background-image: url('img/reebok.jpg');
 }
 
-.campaign__title {
-  background-color: $campaign-title-bg-color;
-  bottom: 0;
-  color: $black;
-  font-size: 1.3rem;
-  margin: 0;
-  padding: 10px 0;
+.campaign__slider {
+  @include translateY(172px);
+  @include transition(all .2s ease);
+  background: rgba($campaign-title-bg-color, .7);
+  height: 100%;
   position: absolute;
+  width: 100%;
+  z-index: 1;
+
+}
+
+.campaign__title {
+  color: $black;
+  font-size: 1.7rem;
+  margin: 0;
+  padding: 19px 0;
   text-align: center;
   width: 100%;
 }
 
-.campaign__svg {
-  display: none;
-  height: 100%;
-  width: 100%;
-}
-
-.campaign__path {
-  fill: $campaign-title-bg-color;
-}
-
-.campaign__path--1 {
-  display: none;
-}
-
 .campaign__details {
-  bottom: 0;
   color: $black;
-  left: 0;
-  position: absolute;
 }
 
 .campaign__detail-list {
+  @include transition(all .2s ease);
   @include opacity(0);
-  @include translateY(75px);
+  @include translateY(250px);
   list-style-type: none;
+}
+
+.link__campaign {
+  @include translateX(-50%);
+  @include transition(opacity .2s ease);
+  @include transition-delay(.3s);
+  @include opacity(0);
+  border: 2px solid $black;
+  bottom: 10px;
+  color: $black;
+  font-size: 1rem;
+  left: 50%;
+  position: absolute;
+  width: 200px;
+}
+
+@for $i from 1 through 3 {
+  .campaign__detail-list-#{$i} {
+    @include transition-delay(.1s + ($i / 10));
+  }
+}
+
+.campaign__holder:hover,
+.campaign__holder:focus {
+
+  .campaign__slider {
+    @include translateY(0);
+    background: rgba($campaign-title-bg-color, .9);
+  }
+
+  .campaign__detail-list {
+    @include translateY(0);
+    @include opacity(1);
+  }
+
+  .link__campaign {
+    @include opacity(1);
+  }
+}
+
+.campaign__iframe {
+  height: 250px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  visibility: hidden;
+  width: 300px;
+  z-index: 2;
 }
 
 //ABOUT
@@ -410,14 +455,7 @@ body {
 
   //WORK
 
-  .campaign__title {
-    background-color: transparent;
-    font-size: 1.7rem;
-    padding: 19px 0;
-  }
-
   .campaign__svg {
     display: block;
   }
 }
-

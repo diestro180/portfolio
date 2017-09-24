@@ -17,8 +17,8 @@ body {
 }
 
 .section {
-  align-items: center;
-  justify-content: center;
+  // align-items: center;
+  // justify-content: center;
   min-height: 100vh;
   position: relative;
   width: 100vw;
@@ -246,8 +246,8 @@ body {
 //WORK
 
 .campaign {
-  display: flex;
-  flex-wrap: wrap;
+  @include display-flex;
+  @include flex-wrap(wrap);
 }
 
 .campaign__holder {
@@ -328,7 +328,8 @@ body {
 }
 
 .campaign__holder:hover,
-.campaign__holder:focus {
+.campaign__holder:focus,
+.campaign__holder--open {
 
   .campaign__slider {
     @include translateY(0);
@@ -346,11 +347,11 @@ body {
 }
 
 .campaign__iframe {
+  display: none;
   height: 250px;
   left: 0;
   position: absolute;
   top: 0;
-  visibility: hidden;
   width: 300px;
   z-index: 2;
 }
@@ -358,8 +359,8 @@ body {
 //ABOUT
 
 .instagram-feed {
-  display: flex;
-  flex-wrap: wrap;
+  @include display-flex;
+  @include flex-wrap(wrap);
   margin-top: 20px;
 }
 
@@ -392,7 +393,7 @@ body {
 
   //ABOUT
   .insta-feed--container {
-    flex-basis: 45%;
+    @include flex-basis(45%);
   }
 
   //CONTACT
@@ -413,9 +414,9 @@ body {
   //MAIN SECTION
 
   .header {
-    align-items: center;
-    display: flex;
-    justify-content: flex-end;
+    @include display-flex;
+    @include justify-content(flex-end);
+    @include align-items(center);
     text-align: center;
     width: 100%;
   }
@@ -446,7 +447,7 @@ body {
 
   //ABOUT
   .insta-feed--container {
-    flex-basis: 30%;
+    @include flex-basis(30%);
   }
 
 }

@@ -7945,7 +7945,12 @@ if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); } //necessary in case Tween
         var $scrollLinks = document.getElementsByClassName('scroll__link'),
             $iframes = document.getElementsByClassName('campaign__iframe'),
             $campaignLink = document.getElementsByClassName('link__campaign'),
-            iframesLink = ['banners/lego', 'banners/adidas', 'banners/reebok'];
+            $campaignHolder = document.getElementsByClassName('campaign__holder--inner'),
+            $campaignTitle = document.getElementsByClassName('campaign__title'),
+            iframesLink = ['assets/lego', 'assets/adidas', 'assets/reebok'],
+            isMobile = function () {
+                return (navigator.userAgent.match(/IEMobile/i) || navigator.userAgent.match(/Opera Mini/i) || navigator.userAgent.match(/iPhone|iPad|iPod/i) || navigator.userAgent.match(/BlackBerry/i) || navigator.userAgent.match(/Android/i));
+            };
         this.bindEvents = function () {
 
             var i = 0,
@@ -7958,8 +7963,14 @@ if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); } //necessary in case Tween
             }
 
             function campaignClick(e) {
+                e.stopPropagation();
                 $iframes[e.target.dataset.campaign].src = iframesLink[e.target.dataset.campaign];
-                TweenMax.to($iframes[e.target.dataset.campaign], 0.3, {autoAlpha: 1});
+                TweenMax.to($iframes[e.target.dataset.campaign], 0.3, {display: 'block'});
+            }
+
+            function campaignClickMobile(e) {
+                e.stopPropagation();
+                $campaignHolder[e.target.dataset.campaign].classList.add('campaign__holder--open');
             }
 
             for (i; i < $scrollLinks.length; i++) {
@@ -7967,7 +7978,13 @@ if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); } //necessary in case Tween
             }
 
             for (j; j < $campaignLink.length; j++) {
-                $campaignLink[j].addEventListener('click', campaignClick);
+
+                if (isMobile()) {
+                    $campaignTitle[j].addEventListener('touchend', campaignClickMobile);
+                    $campaignLink[j].addEventListener('touchend', campaignClick);
+                } else {
+                    $campaignLink[j].addEventListener('click', campaignClick);
+                }
             }
         };
 
